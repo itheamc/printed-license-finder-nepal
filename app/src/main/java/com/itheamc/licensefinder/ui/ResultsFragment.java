@@ -22,6 +22,11 @@ import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.Toast;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.initialization.InitializationStatus;
+import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 import com.itheamc.licensefinder.R;
 import com.itheamc.licensefinder.adapters.LicenseAdapter;
 import com.itheamc.licensefinder.adapters.LicenseCallback;
@@ -39,6 +44,7 @@ public class ResultsFragment extends Fragment implements LicenseCallback, Filter
     private SharedViewModel viewModel;
     private LicenseAdapter licenseAdapter;
     private NavController navController;
+    private AdView mAdView;
 
 
     public ResultsFragment() {
@@ -73,7 +79,7 @@ public class ResultsFragment extends Fragment implements LicenseCallback, Filter
 
         List<License> licenses = viewModel.getLicenseList();
         submitLicenses(licenses);
-
+        loadAds();
     }
 
     // Function to submit list
@@ -86,6 +92,23 @@ public class ResultsFragment extends Fragment implements LicenseCallback, Filter
         } else {
             licenseAdapter.submitList(licenses);
             resultsBinding.noresultLayout.setVisibility(View.VISIBLE);
+        }
+    }
+
+
+    // Function to load ads
+    private void loadAds() {
+        if (getContext() != null) {
+            MobileAds.initialize(getContext(), new OnInitializationCompleteListener() {
+                @Override
+                public void onInitializationComplete(InitializationStatus initializationStatus) {
+                    Log.d(TAG, "onInitializationComplete: " + initializationStatus.toString());
+                }
+            });
+
+            mAdView = resultsBinding.bannerAdView;
+            AdRequest adRequest = new AdRequest.Builder().build();
+            mAdView.loadAd(adRequest);
         }
     }
 
