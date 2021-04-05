@@ -105,7 +105,7 @@ public class SearchFragment extends Fragment implements NetworkCallback {
                         Toast.makeText(getContext(), "You don't have active network connection.", Toast.LENGTH_LONG).show();
                     }
                 } else {
-                    Toast.makeText(getContext(), "Please input name or license number to find!!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getContext(), "Please input name or license number !!", Toast.LENGTH_LONG).show();
                 }
 
             }
