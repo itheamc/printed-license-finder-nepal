@@ -1,11 +1,11 @@
 package com.itheamc.licensefinder.ui;
 
+import android.os.Bundle;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.NavigationUI;
-
-import android.os.Bundle;
 
 import com.itheamc.licensefinder.R;
 import com.itheamc.licensefinder.databinding.ActivityMainBinding;
@@ -34,4 +34,5 @@ public class MainActivity extends AppCompatActivity {
         navController.navigateUp();
         return super.onSupportNavigateUp();
     }
+
 }

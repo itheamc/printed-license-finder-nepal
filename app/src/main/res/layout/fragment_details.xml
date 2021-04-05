@@ -67,7 +67,7 @@
                     android:layout_marginTop="24dp"
                     android:layout_marginEnd="24dp"
                     android:fontFamily="@font/baumans"
-                    android:text="@{`ID:  ` + String.valueOf(license._id)}"
+                    android:text="@{String.format(`%s:  %s`, @string/dlid, String.valueOf(license._id))}"
                     android:textColor="@color/purple_200"
                     android:textSize="18sp"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -81,7 +81,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:fontFamily="@font/baumans"
-                    android:text="@{String.format(`LICENSE NUMBER:  %s`, license._license_no)}"
+                    android:text="@{String.format(`%s:  %s`, @string/driving_license_no, license._license_no)}"
                     android:textColor="@color/purple_200"
                     android:textSize="18sp"
                     app:layout_constraintEnd_toEndOf="@+id/id"
@@ -90,17 +90,31 @@
                     tools:text="License Number:  01-10-00806662" />
 
                 <TextView
-                    android:id="@+id/isapproved"
+                    android:id="@+id/type"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:fontFamily="@font/baumans"
-                    android:text="@{`IS APPROVED:  ` + String.valueOf(license._approved)}"
+                    android:text="@{String.format(`%s:  %s`, @string/type, license._type)}"
                     android:textColor="@color/purple_200"
                     android:textSize="18sp"
                     app:layout_constraintEnd_toEndOf="@+id/licenseNumber"
                     app:layout_constraintStart_toStartOf="@id/licenseNumber"
                     app:layout_constraintTop_toBottomOf="@id/licenseNumber"
+                    tools:text="License Type:  NEW LICENSE" />
+
+                <TextView
+                    android:id="@+id/isapproved"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:fontFamily="@font/baumans"
+                    android:text="@{String.format(`%s:  %s`, @string/is_approved, String.valueOf(license._approved))}"
+                    android:textColor="@color/purple_200"
+                    android:textSize="18sp"
+                    app:layout_constraintEnd_toEndOf="@+id/type"
+                    app:layout_constraintStart_toStartOf="@id/type"
+                    app:layout_constraintTop_toBottomOf="@id/type"
                     tools:text="Is Approved:  true" />
 
                 <TextView
@@ -109,13 +123,27 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:fontFamily="@font/baumans"
-                    android:text="@{String.format(`ISSUED OFFICE:  %s`, license._issuer)}"
+                    android:text="@{String.format(`%s:  %s`, @string/issuer, license._issuer)}"
                     android:textColor="@color/purple_200"
                     android:textSize="18sp"
                     app:layout_constraintEnd_toEndOf="@+id/isapproved"
                     app:layout_constraintStart_toStartOf="@id/isapproved"
                     app:layout_constraintTop_toBottomOf="@id/isapproved"
                     tools:text="Issuer:  Bagmati, Lalitpur, Nepal" />
+
+                <TextView
+                    android:id="@+id/dispatchDate"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:fontFamily="@font/baumans"
+                    android:text="@{String.format(`%s:  %s`, @string/dispatch_date, license._sent_date)}"
+                    android:textColor="@color/purple_200"
+                    android:textSize="18sp"
+                    app:layout_constraintEnd_toEndOf="@+id/issuer"
+                    app:layout_constraintStart_toStartOf="@id/issuer"
+                    app:layout_constraintTop_toBottomOf="@id/issuer"
+                    tools:text="Dispatch Date:  March 20, 2020" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>

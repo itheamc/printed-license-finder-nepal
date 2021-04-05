@@ -22,7 +22,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
             android:fontFamily="sans-serif-thin"
-            android:text="@string/welcome"
+            android:text="@string/welcome_text_one"
             android:textColor="@color/purple_200"
             android:textSize="24sp" />
 
@@ -32,7 +32,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
             android:fontFamily="sans-serif-thin"
-            android:text="@string/to"
+            android:text="@string/welcome_text_two"
             android:textColor="@color/purple_200"
             android:textSize="18sp" />
 
@@ -42,7 +42,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
             android:fontFamily="sans-serif-thin"
-            android:text="@string/license_finder"
+            android:text="@string/welcome_text_three"
             android:textColor="@color/purple_200"
             android:textSize="36sp" />
 

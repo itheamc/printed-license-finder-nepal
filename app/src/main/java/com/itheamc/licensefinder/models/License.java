@@ -12,23 +12,26 @@ public class License {
     private String _license_no;
     private boolean _approved;
     private String _issuer;
+    private String _type;
+    private String _sent_date;
 
 
     // Constructors
     public License() {
     }
 
-    public License(int _id, String _name, String _image, String _license_no, boolean _approved, String _issuer) {
+    public License(int _id, String _name, String _image, String _license_no, boolean _approved, String _issuer, String _type, String _sent_date) {
         this._id = _id;
         this._name = _name;
         this._image = _image;
         this._license_no = _license_no;
         this._approved = _approved;
         this._issuer = _issuer;
+        this._type = _type;
+        this._sent_date = _sent_date;
     }
 
     // Getters
-
     public int get_id() {
         return _id;
     }
@@ -53,6 +56,15 @@ public class License {
         return _issuer;
     }
 
+    public String get_type() {
+        return _type;
+    }
+
+    public String get_sent_date() {
+        return _sent_date;
+    }
+
+
     // Overriding toString() method
     @Override
     public String toString() {
@@ -63,9 +75,10 @@ public class License {
                 ", _license_no='" + _license_no + '\'' +
                 ", _approved=" + _approved +
                 ", _issuer='" + _issuer + '\'' +
+                ", _type='" + _type + '\'' +
+                ", _sent_date='" + _sent_date + '\'' +
                 '}';
     }
-
 
     // Overriding equals() method
     @Override
@@ -78,7 +91,9 @@ public class License {
                 get_name().equals(license.get_name()) &&
                 Objects.equals(get_image(), license.get_image()) &&
                 get_license_no().equals(license.get_license_no()) &&
-                get_issuer().equals(license.get_issuer());
+                get_issuer().equals(license.get_issuer()) &&
+                get_type().equals(license.get_type()) &&
+                get_sent_date().equals(license.get_sent_date());
     }
 
 
@@ -96,7 +111,9 @@ public class License {
                     newItem.get_image().equals(oldItem.get_image()) &&
                     newItem.get_license_no().equals(oldItem.get_license_no()) &&
                     newItem.get_issuer().equals(oldItem.get_issuer()) &&
-                    newItem.is_approved() == oldItem.is_approved();
+                    newItem.is_approved() == oldItem.is_approved() &&
+                    newItem.get_type().equals(oldItem.get_type()) &&
+                    newItem.get_sent_date().equals(oldItem.get_sent_date());
         }
     };
 }

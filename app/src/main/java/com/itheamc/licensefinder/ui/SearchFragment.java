@@ -149,8 +149,10 @@ public class SearchFragment extends Fragment implements NetworkCallback {
                         "No Image",
                         jsonObject.getString("DINo"),
                         jsonObject.getBoolean("IsApproved"),
-                        jsonObject.getString("SentBranch")
-                );
+                        jsonObject.getString("SentBranch"),
+                        jsonObject.getString("Type"),
+                        jsonObject.getString("Remarks")
+                        );
 
                 licenseList.add(license);
             } catch (JSONException e) {
