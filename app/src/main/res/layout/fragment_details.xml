@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="license"
+            type="com.itheamc.licensefinder.models.License" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.DetailsFragment">
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="16dp"
+            android:src="@drawable/account_circle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/licenseHolderName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/acme"
+            android:text="@{license._name}"
+            android:textColor="@color/purple_200"
+            android:textSize="30sp"
+            app:layout_constraintEnd_toEndOf="@+id/imageView2"
+            app:layout_constraintStart_toStartOf="@+id/imageView2"
+            app:layout_constraintTop_toBottomOf="@+id/imageView2"
+            tools:text="Amit Chaudhary" />
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginBottom="32dp"
+            app:cardCornerRadius="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/licenseHolderName" >
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/id"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="24dp"
+                    android:layout_marginEnd="24dp"
+                    android:fontFamily="@font/baumans"
+                    android:text="@{`ID:  ` + String.valueOf(license._id)}"
+                    android:textColor="@color/purple_200"
+                    android:textSize="18sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="Id:  734521" />
+
+                <TextView
+                    android:id="@+id/licenseNumber"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:fontFamily="@font/baumans"
+                    android:text="@{String.format(`LICENSE NUMBER:  %s`, license._license_no)}"
+                    android:textColor="@color/purple_200"
+                    android:textSize="18sp"
+                    app:layout_constraintEnd_toEndOf="@+id/id"
+                    app:layout_constraintStart_toStartOf="@id/id"
+                    app:layout_constraintTop_toBottomOf="@id/id"
+                    tools:text="License Number:  01-10-00806662" />
+
+                <TextView
+                    android:id="@+id/isapproved"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:fontFamily="@font/baumans"
+                    android:text="@{`IS APPROVED:  ` + String.valueOf(license._approved)}"
+                    android:textColor="@color/purple_200"
+                    android:textSize="18sp"
+                    app:layout_constraintEnd_toEndOf="@+id/licenseNumber"
+                    app:layout_constraintStart_toStartOf="@id/licenseNumber"
+                    app:layout_constraintTop_toBottomOf="@id/licenseNumber"
+                    tools:text="Is Approved:  true" />
+
+                <TextView
+                    android:id="@+id/issuer"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:fontFamily="@font/baumans"
+                    android:text="@{String.format(`ISSUED OFFICE:  %s`, license._issuer)}"
+                    android:textColor="@color/purple_200"
+                    android:textSize="18sp"
+                    app:layout_constraintEnd_toEndOf="@+id/isapproved"
+                    app:layout_constraintStart_toStartOf="@id/isapproved"
+                    app:layout_constraintTop_toBottomOf="@id/isapproved"
+                    tools:text="Issuer:  Bagmati, Lalitpur, Nepal" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
