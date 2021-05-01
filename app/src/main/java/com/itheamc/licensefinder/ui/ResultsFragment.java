@@ -32,6 +32,7 @@ import com.itheamc.licensefinder.adapters.LicenseAdapter;
 import com.itheamc.licensefinder.adapters.LicenseCallback;
 import com.itheamc.licensefinder.databinding.FragmentResultsBinding;
 import com.itheamc.licensefinder.models.License;
+import com.itheamc.licensefinder.utils.StorageUtility;
 import com.itheamc.licensefinder.viewmodel.SharedViewModel;
 
 import java.util.ArrayList;
@@ -115,9 +116,15 @@ public class ResultsFragment extends Fragment implements LicenseCallback, Filter
 
     @Override
     public void onClick(int position) {
-        viewModel.setLicense(viewModel.getTempList().get(position));
-        // Navigate to the Detail page
-        navController.navigate(R.id.action_resultsFragment_to_detailsFragment);
+        License license = viewModel.getTempList().get(position);
+        viewModel.setLicense(license);
+
+        if (license.get_license_no().equals(StorageUtility.getLicenseNumber(requireActivity()))) {
+            navController.navigate(R.id.action_resultsFragment_to_licenseFragment);
+        } else {
+            // Navigate to the Detail page
+            navController.navigate(R.id.action_resultsFragment_to_detailsFragment);
+        }
     }
 
 
