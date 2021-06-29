@@ -45,19 +45,20 @@
                 android:id="@+id/npg_nepali"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="नेपाल सरकार"
+                android:text="@string/nepal_govt"
                 android:textAlignment="center"
                 android:textColor="@color/ng_title"
                 android:textSize="10sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="SmallSp" />
 
             <TextView
                 android:id="@+id/npg_english"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="GOVERNMENT OF NEPAL"
+                android:text="@string/government_of_nepal_en"
                 android:textAlignment="center"
                 android:textColor="@color/ng_title"
                 android:textSize="10sp"
@@ -69,12 +70,13 @@
                 android:id="@+id/drivingLicensePermission"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="सवारी चालक आनुमतिपत्र"
+                android:text="@string/driving_lc"
                 android:textAlignment="center"
                 android:textSize="11sp"
                 app:layout_constraintEnd_toEndOf="@+id/npg_english"
                 app:layout_constraintStart_toStartOf="@+id/npg_english"
-                app:layout_constraintTop_toBottomOf="@+id/npg_english" />
+                app:layout_constraintTop_toBottomOf="@+id/npg_english"
+                tools:ignore="SmallSp" />
 
             <TextView
                 android:id="@+id/drivingLicenseLabel"
@@ -279,13 +281,14 @@
 
             <ImageView
                 android:id="@+id/userImage"
-                android:layout_width="60dp"
-                android:layout_height="75dp"
-                android:layout_marginTop="8dp"
+                android:layout_width="68dp"
+                android:layout_height="80dp"
+                android:layout_marginTop="14dp"
                 android:layout_marginEnd="16dp"
+                android:background="#FFFFFF"
+                android:imageUrl="@{license._image}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/npFlag"
-                android:imageUrl="@{license._image}"
                 tools:srcCompat="@drawable/ic_launcher_background" />
 
             <ImageView
@@ -355,11 +358,12 @@
                 android:elevation="5dp"
                 android:fontFamily="sans-serif-light"
                 android:letterSpacing="0.05"
-                android:text="@{String.format(`%s - %s, %s, %s %s, Nepal`, license._municipality, license._ward_number, license._tole, license._district, license._zone )}"
+                android:text="@{String.format(`%s - %s,\n%s %s,\nNepal`, license._municipality, license._ward_number, license._district, license._zone )}"
                 android:textSize="8sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toEndOf="@+id/addressLabel"
-                app:layout_constraintTop_toTopOf="@+id/addressLabel" />
+                app:layout_constraintTop_toTopOf="@+id/addressLabel"
+                tools:ignore="SmallSp" />
 
             <TextView
                 android:id="@+id/officeName"

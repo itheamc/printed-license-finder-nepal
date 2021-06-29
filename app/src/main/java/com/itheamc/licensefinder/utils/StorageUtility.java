@@ -15,7 +15,14 @@ public class StorageUtility {
 
     public static String getLicenseNumber(Activity activity) {
         SharedPreferences sharedPreferences = activity.getSharedPreferences("LICENSE", Context.MODE_PRIVATE);
-        return sharedPreferences.getString("license_number", "01-10-00648118");
+        return sharedPreferences.getString("license_number", null);
+    }
+
+    public static void setLicenseNumber(Activity activity, String licNo) {
+        SharedPreferences sharedPreferences = activity.getSharedPreferences("LICENSE", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("license_number", licNo);
+        editor.apply();
     }
 
     public static void setBirthDate(Activity activity, int y, int m, int d) {

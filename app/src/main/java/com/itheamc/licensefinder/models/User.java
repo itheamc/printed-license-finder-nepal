@@ -1,11 +1,11 @@
 package com.itheamc.licensefinder.models;
 
-public class Datas {
+public class User {
     private String key;
     private String value;
 
     // Constructor
-    public Datas(String key, String value) {
+    public User(String key, String value) {
         this.key = key;
         this.value = value;
     }

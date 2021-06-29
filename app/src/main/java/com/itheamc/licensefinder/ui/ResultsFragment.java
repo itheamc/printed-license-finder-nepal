@@ -119,11 +119,15 @@ public class ResultsFragment extends Fragment implements LicenseCallback, Filter
         License license = viewModel.getTempList().get(position);
         viewModel.setLicense(license);
 
-        if (license.get_license_no().equals(StorageUtility.getLicenseNumber(requireActivity()))) {
-            navController.navigate(R.id.action_resultsFragment_to_licenseFragment);
+        if (StorageUtility.getLicenseNumber(requireActivity()) != null) {
+            if (StorageUtility.getLicenseNumber(requireActivity()).equals(license.get_license_no())) {
+                navController.navigate(R.id.action_resultsFragment_to_licenseFragment);
+            } else {
+                navController.navigate(R.id.action_resultsFragment_to_detailsFragment);
+            }
         } else {
             // Navigate to the Detail page
-            navController.navigate(R.id.action_resultsFragment_to_detailsFragment);
+            navController.navigate(R.id.action_resultsFragment_to_licenseFragment);
         }
     }
 
