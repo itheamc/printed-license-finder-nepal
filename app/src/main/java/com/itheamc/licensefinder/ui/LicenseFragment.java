@@ -262,6 +262,7 @@ public class LicenseFragment extends Fragment {
 
             licenseBinding.progressBar.setVisibility(View.GONE);
             licenseBinding.constraintLayout.setVisibility(View.VISIBLE);
+            licenseBinding.userInfoLabel.setVisibility(View.VISIBLE);
             licenseBinding.setLicense(license);
             StorageUtility.setLicenseNumber(requireActivity(), license.get_license_no());
             Log.d(TAG, "run: " + license.toString());

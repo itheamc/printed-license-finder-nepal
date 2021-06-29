@@ -134,7 +134,8 @@ public class SearchFragment extends Fragment implements NetworkCallback {
     @Override
     public void onFailure(String error) {
         searchBinding.progressBar.setVisibility(View.GONE);
-        Toast.makeText(requireContext(), error, Toast.LENGTH_SHORT).show();
+        Toast.makeText(requireContext(), "Something went wrong!!", Toast.LENGTH_SHORT).show();
+        Log.d(TAG, "onFailure: " + error);
     }
 
     // Function to convert json array to List<License> lists
