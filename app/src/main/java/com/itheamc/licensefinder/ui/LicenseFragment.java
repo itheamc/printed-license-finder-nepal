@@ -10,7 +10,6 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.core.os.HandlerCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
@@ -26,7 +25,6 @@ import com.itheamc.licensefinder.utils.FormatDate;
 import com.itheamc.licensefinder.utils.StorageUtility;
 import com.itheamc.licensefinder.viewmodel.SharedViewModel;
 
-import org.jetbrains.annotations.NotNull;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -67,7 +65,7 @@ public class LicenseFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(@NotNull LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         licenseBinding = FragmentLicenseBinding.inflate(inflater, container, false);
@@ -75,7 +73,7 @@ public class LicenseFragment extends Fragment {
     }
 
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(@NonNull View view, @NonNull Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
         navController = Navigation.findNavController(view);
@@ -116,12 +114,12 @@ public class LicenseFragment extends Fragment {
 
             client.newCall(request).enqueue(new Callback() {
                 @Override
-                public void onFailure(@NotNull Call call, @NotNull IOException e) {
+                public void onFailure(@NonNull Call call, @NonNull IOException e) {
                     notifyFailure(e.getMessage());
                 }
 
                 @Override
-                public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+                public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
                     parseBasicInfoResponse(response.body().string(), client);
                 }
             });
@@ -173,12 +171,12 @@ public class LicenseFragment extends Fragment {
 
         client.newCall(request).enqueue(new Callback() {
             @Override
-            public void onFailure(@NotNull Call call, @NotNull IOException e) {
+            public void onFailure(@NonNull Call call, @NonNull IOException e) {
                 notifyFailure(e.getMessage());
             }
 
             @Override
-            public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+            public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
                 parseUserData(response.body().string());
             }
         });

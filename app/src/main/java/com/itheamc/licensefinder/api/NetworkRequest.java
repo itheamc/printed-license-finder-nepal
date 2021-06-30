@@ -2,6 +2,8 @@ package com.itheamc.licensefinder.api;
 
 import android.os.Handler;
 
+import androidx.annotation.NonNull;
+
 import com.itheamc.licensefinder.models.Query;
 
 import org.jetbrains.annotations.NotNull;
@@ -66,12 +68,12 @@ public class NetworkRequest {
 
                 okHttpClient.newCall(request).enqueue(new Callback() {
                     @Override
-                    public void onFailure(@NotNull Call call, @NotNull IOException e) {
+                    public void onFailure(@NonNull Call call, @NonNull IOException e) {
                         notifyErrors(callback, e.getMessage());
                     }
 
                     @Override
-                    public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+                    public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
                         try {
                             JSONObject jsonObject = new JSONObject("{licenses:" + Objects.requireNonNull(response.body()).string() + "}");
                             JSONArray jsonArray = jsonObject.getJSONArray("licenses");

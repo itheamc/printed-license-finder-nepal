@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">License Finder</string>
+    <string name="app_name">License Checker</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">हेल्लो बल्यांक फ्राग्मेंट</string>
     <string name="no_results_found">तपाइले खोज्नुभएको विवरण उपलब्ध छैन।</string>
