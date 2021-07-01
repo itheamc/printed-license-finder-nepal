@@ -95,7 +95,7 @@
         android:layout_marginEnd="32dp"
         android:layout_marginBottom="32dp"
         android:fontFamily="sans-serif-light"
-        android:text="Please enter your name or license number or both to search your license print status."
+        android:text="@string/please_enter_your_name_or_license_number_or_both_to_search_your_license_print_status"
         android:textAlignment="center"
         android:textColor="@color/purple_200"
         android:textSize="10sp"

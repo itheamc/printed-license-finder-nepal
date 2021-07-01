@@ -4,10 +4,28 @@ public class FormatDate {
 
     /**
      * Formating date
-     * @param date --- It will take the date in this format --- 15-Jan-1996
+     * @param date --- It will take the date in this format --- 15-05-1996
      * @return it will return the date in this format --- 1996-01-15T00:00:00+05:45
      */
     public static String format(String date) {
+        String[] splitDate = date.split("-");
+        if (splitDate[0].length() == 1) {
+            splitDate[0] = "0" + splitDate[0];
+        }
+
+        if (splitDate[1].length() == 1) {
+            splitDate[1] = "0" + splitDate[1];
+        }
+        return splitDate[2] + "-" + splitDate[1] + "-" + splitDate[0] + "T00:00:00+05:45";
+    }
+
+
+    /**
+     * Formating date
+     * @param date --- It will take the date in this format --- 15-Jan-1996
+     * @return it will return the date in this format --- 1996-01-15T00:00:00+05:45
+     */
+    public static String format0(String date) {
         String[] splitDate = date.split("-");
         return splitDate[2] + "-" + getMonthInNumber(splitDate[1].toLowerCase()) + "-" + splitDate[0] + "T00:00:00+05:45";
     }

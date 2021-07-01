@@ -7,8 +7,10 @@
     tools:context=".ui.HomeFragment" >
 
     <LinearLayout
+        android:id="@+id/welcomeLinearLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="48dp"
         android:gravity="center"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -46,10 +48,23 @@
             android:textColor="@color/purple_200"
             android:textSize="36sp" />
 
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/buttonLinearLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/codedBy"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/welcomeLinearLayout">
+
         <Button
             android:id="@+id/navigateToSearch"
             style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingLeft="24dp"
             android:paddingRight="24dp"
@@ -57,20 +72,19 @@
             android:textColor="@color/purple_200"
             app:cornerRadius="24dp"
             app:strokeColor="@color/purple_200" />
-    </LinearLayout>
 
-    <TextView
-        android:id="@+id/textView5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="4dp"
-        android:fontFamily="@font/atma_light"
-        android:text="@string/powered_by_dotm_nepal"
-        android:textColor="@color/purple_200"
-        android:textSize="10sp"
-        app:layout_constraintBottom_toTopOf="@+id/codedBy"
-        app:layout_constraintEnd_toEndOf="@+id/codedBy"
-        app:layout_constraintStart_toStartOf="@+id/codedBy" />
+        <Button
+            android:id="@+id/navigateToLicense"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="24dp"
+            android:paddingRight="24dp"
+            android:text="@string/demo_license"
+            android:textColor="@color/purple_200"
+            app:cornerRadius="24dp"
+            app:strokeColor="@color/purple_200" />
+    </LinearLayout>
 
     <TextView
         android:id="@+id/codedBy"
@@ -86,4 +100,38 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/codedBy"
+        app:layout_constraintEnd_toEndOf="@+id/codedBy"
+        app:layout_constraintStart_toStartOf="@+id/codedBy">
+
+        <TextView
+            android:id="@+id/disclaimer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:fontFamily="@font/baumans"
+            android:text="@string/disclaimer"
+            android:textColor="@color/purple_500"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/privacyPolicy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:fontFamily="@font/baumans"
+            android:text="@string/privacy_policy"
+            android:textColor="@color/purple_500"
+            android:textSize="12sp" />
+    </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

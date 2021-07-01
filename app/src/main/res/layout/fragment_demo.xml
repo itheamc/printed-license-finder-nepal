@@ -1,0 +1,563 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="license"
+            type="com.itheamc.licensefinder.models.License" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.DemoFragment">
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:elevation="10dp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout"
+            android:layout_width="375dp"
+            android:layout_height="225dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/license_card"
+            android:padding="4dp"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/npg_nepali"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/nepal_govt"
+                android:textAlignment="center"
+                android:textColor="@color/ng_title"
+                android:textSize="10sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="SmallSp" />
+
+            <TextView
+                android:id="@+id/npg_english"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/government_of_nepal_en"
+                android:textAlignment="center"
+                android:textColor="@color/ng_title"
+                android:textSize="10sp"
+                app:layout_constraintEnd_toEndOf="@+id/npg_nepali"
+                app:layout_constraintStart_toStartOf="@+id/npg_nepali"
+                app:layout_constraintTop_toBottomOf="@+id/npg_nepali" />
+
+            <TextView
+                android:id="@+id/drivingLicensePermission"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/driving_lc"
+                android:textAlignment="center"
+                android:textSize="11sp"
+                app:layout_constraintEnd_toEndOf="@+id/npg_english"
+                app:layout_constraintStart_toStartOf="@+id/npg_english"
+                app:layout_constraintTop_toBottomOf="@+id/npg_english"
+                tools:ignore="SmallSp" />
+
+            <TextView
+                android:id="@+id/drivingLicenseLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="DRIVING LICENSE"
+                android:textAlignment="center"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="@+id/drivingLicensePermission"
+                app:layout_constraintStart_toStartOf="@+id/drivingLicensePermission"
+                app:layout_constraintTop_toBottomOf="@+id/drivingLicensePermission" />
+
+            <TextView
+                android:id="@+id/nameLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="Name:"
+                android:textSize="8sp"
+                app:layout_constraintStart_toStartOf="@+id/drivingLicenseLabel"
+                app:layout_constraintTop_toBottomOf="@+id/drivingLicenseLabel" />
+
+            <TextView
+                android:id="@+id/addressLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="Address:"
+                android:textSize="8sp"
+                app:layout_constraintStart_toStartOf="@+id/nameLabel"
+                app:layout_constraintTop_toBottomOf="@+id/nameLabel" />
+
+            <TextView
+                android:id="@+id/licenseOfficeLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="License Office:"
+                android:textSize="8sp"
+                app:layout_constraintStart_toStartOf="@+id/addressLabel"
+                app:layout_constraintTop_toBottomOf="@+id/addressLabel" />
+
+            <TextView
+                android:id="@+id/dobLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:text="D.O.B.:"
+                android:textSize="8sp"
+                app:layout_constraintStart_toStartOf="@+id/licenseOfficeLabel"
+                app:layout_constraintTop_toBottomOf="@+id/licenseOfficeLabel" />
+
+            <TextView
+                android:id="@+id/fatherNameLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:text="F/H Name:"
+                android:textSize="8sp"
+                app:layout_constraintStart_toStartOf="@+id/dobLabel"
+                app:layout_constraintTop_toBottomOf="@+id/dobLabel" />
+
+            <TextView
+                android:id="@+id/citizenshipNumberLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:text="Citizenship No.:"
+                android:textSize="8sp"
+                app:layout_constraintStart_toStartOf="@+id/fatherNameLabel"
+                app:layout_constraintTop_toBottomOf="@+id/fatherNameLabel" />
+
+            <TextView
+                android:id="@+id/passportNumberLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:text="Passport No.:"
+                android:textSize="8sp"
+                app:layout_constraintStart_toStartOf="@+id/citizenshipNumberLabel"
+                app:layout_constraintTop_toBottomOf="@+id/citizenshipNumberLabel" />
+
+            <TextView
+                android:id="@+id/contactNumberLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:text="Contact No.:"
+                android:textSize="8sp"
+                app:layout_constraintStart_toStartOf="@+id/passportNumberLabel"
+                app:layout_constraintTop_toBottomOf="@+id/passportNumberLabel" />
+
+            <TextView
+                android:id="@+id/dlNumber"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="D.L.No.:"
+                android:textSize="8sp"
+                app:layout_constraintStart_toStartOf="@+id/gov_logo"
+                app:layout_constraintTop_toBottomOf="@+id/gov_logo" />
+
+            <TextView
+                android:id="@+id/bloodGroup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="B.G.:"
+                android:textSize="8sp"
+                app:layout_constraintStart_toStartOf="@+id/dlNumber"
+                app:layout_constraintTop_toBottomOf="@+id/dlNumber"
+                tools:ignore="SmallSp" />
+
+            <TextView
+                android:id="@+id/dateOfIssue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="4dp"
+                android:text="D.O.I.:"
+                android:textSize="8sp"
+                app:layout_constraintBottom_toTopOf="@+id/dateOfExpiry"
+                app:layout_constraintStart_toStartOf="@+id/dateOfExpiry" />
+
+            <TextView
+                android:id="@+id/dateOfExpiry"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                android:text="D.O.E.:"
+                android:textSize="8sp"
+                app:layout_constraintBottom_toTopOf="@+id/issuedByBox"
+                app:layout_constraintStart_toStartOf="@+id/bloodGroup" />
+
+            <TextView
+                android:id="@+id/license_category"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="Category: "
+                android:textSize="8sp"
+                app:layout_constraintStart_toStartOf="@+id/userImage"
+                app:layout_constraintTop_toBottomOf="@+id/userImage" />
+
+            <TextView
+                android:id="@+id/transparentBox"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:layout_marginStart="8dp"
+                android:background="#E4D1D1"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/contactNumberLabel"
+                app:layout_constraintTop_toBottomOf="@+id/contactNumberLabel" />
+
+            <ImageView
+                android:id="@+id/npFlag"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:layout_marginEnd="16dp"
+                android:foreground="@color/white"
+                android:foregroundTint="#1EFFFFFF"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_flag" />
+
+            <ImageView
+                android:id="@+id/npMapImageView"
+                android:layout_width="50dp"
+                android:layout_height="36dp"
+                android:layout_marginStart="24dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/transparentBox"
+                app:layout_constraintTop_toBottomOf="@+id/contactNumberLabel"
+                app:srcCompat="@drawable/ic_map" />
+
+            <TextView
+                android:id="@+id/issuedByBox"
+                android:layout_width="90dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/text_box_outline"
+                android:paddingLeft="16dp"
+                android:paddingTop="4dp"
+                android:paddingRight="16dp"
+                android:paddingBottom="4dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:id="@+id/userSignBox"
+                android:layout_width="90dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="12dp"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/text_box_outline"
+                android:paddingLeft="16dp"
+                android:paddingTop="4dp"
+                android:paddingRight="16dp"
+                android:paddingBottom="4dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <ImageView
+                android:id="@+id/userImage"
+                android:layout_width="68dp"
+                android:layout_height="80dp"
+                android:layout_marginTop="14dp"
+                android:layout_marginEnd="16dp"
+                android:background="#FFFFFF"
+                android:imageUrl="@{license._image}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/npFlag"
+                tools:srcCompat="@drawable/ic_launcher_background" />
+
+            <ImageView
+                android:id="@+id/gov_logo"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="8dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/gov_logo" />
+
+            <ImageView
+                android:id="@+id/emvChipImage"
+                android:layout_width="65dp"
+                android:layout_height="65dp"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="8dp"
+                app:layout_constraintStart_toStartOf="@+id/bloodGroup"
+                app:layout_constraintTop_toBottomOf="@+id/bloodGroup"
+                app:srcCompat="@drawable/ic_emv_chip" />
+
+            <TextView
+                android:id="@+id/issuedByText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:text="Issued By"
+                android:textSize="8sp"
+                app:layout_constraintEnd_toEndOf="@+id/issuedByBox"
+                app:layout_constraintStart_toStartOf="@+id/issuedByBox"
+                app:layout_constraintTop_toBottomOf="@+id/issuedByBox" />
+
+            <TextView
+                android:id="@+id/signatureHolderText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:text="Signature of Holder"
+                android:textSize="8sp"
+                app:layout_constraintEnd_toEndOf="@+id/userSignBox"
+                app:layout_constraintStart_toStartOf="@+id/userSignBox"
+                app:layout_constraintTop_toBottomOf="@+id/userSignBox" />
+
+            <!--   This is the section where dynamic value will be set     -->
+
+            <TextView
+                android:id="@+id/userName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="2dp"
+                android:elevation="5dp"
+                android:fontFamily="sans-serif-light"
+                android:letterSpacing="0.05"
+                android:text="@{license._name}"
+                android:textSize="8sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/nameLabel"
+                app:layout_constraintStart_toEndOf="@+id/nameLabel"
+                app:layout_constraintTop_toTopOf="@+id/nameLabel" />
+
+            <TextView
+                android:id="@+id/userAddress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:elevation="5dp"
+                android:fontFamily="sans-serif-light"
+                android:letterSpacing="0.05"
+                android:text="@{String.format(`%s - %s,\n%s %s,\nNepal`, license._municipality, license._ward_number, license._district, license._zone )}"
+                android:textSize="8sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@+id/addressLabel"
+                app:layout_constraintTop_toTopOf="@+id/addressLabel"
+                tools:ignore="SmallSp" />
+
+            <TextView
+                android:id="@+id/officeName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="2dp"
+                android:elevation="5dp"
+                android:fontFamily="sans-serif-light"
+                android:letterSpacing="0.05"
+                android:text="@{license._issuer}"
+                android:textSize="8sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/licenseOfficeLabel"
+                app:layout_constraintStart_toEndOf="@+id/licenseOfficeLabel"
+                app:layout_constraintTop_toTopOf="@+id/licenseOfficeLabel" />
+
+            <TextView
+                android:id="@+id/userDob"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="2dp"
+                android:elevation="5dp"
+                android:fontFamily="sans-serif-light"
+                android:letterSpacing="0.05"
+                android:text="@{license._dob_ad}"
+                android:textSize="8sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/dobLabel"
+                app:layout_constraintStart_toEndOf="@+id/dobLabel"
+                app:layout_constraintTop_toTopOf="@+id/dobLabel" />
+
+            <TextView
+                android:id="@+id/fatherName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="2dp"
+                android:elevation="5dp"
+                android:fontFamily="sans-serif-light"
+                android:letterSpacing="0.05"
+                android:text=""
+                android:textSize="8sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/fatherNameLabel"
+                app:layout_constraintStart_toEndOf="@+id/fatherNameLabel"
+                app:layout_constraintTop_toTopOf="@+id/fatherNameLabel" />
+
+            <TextView
+                android:id="@+id/citizenshipNumber"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="2dp"
+                android:elevation="5dp"
+                android:fontFamily="sans-serif-light"
+                android:letterSpacing="0.05"
+                android:text="@{license._citizenship_no}"
+                android:textSize="8sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/citizenshipNumberLabel"
+                app:layout_constraintStart_toEndOf="@+id/citizenshipNumberLabel"
+                app:layout_constraintTop_toTopOf="@+id/citizenshipNumberLabel" />
+
+            <TextView
+                android:id="@+id/passportNumber"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="2dp"
+                android:elevation="5dp"
+                android:fontFamily="sans-serif-light"
+                android:letterSpacing="0.05"
+                android:text=""
+                android:textSize="8sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/passportNumberLabel"
+                app:layout_constraintStart_toEndOf="@+id/passportNumberLabel"
+                app:layout_constraintTop_toTopOf="@+id/passportNumberLabel" />
+
+            <TextView
+                android:id="@+id/contactNumber"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:elevation="5dp"
+                android:fontFamily="sans-serif-light"
+                android:letterSpacing="0.05"
+                android:text="9800000000"
+                android:textSize="8sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/contactNumberLabel"
+                app:layout_constraintStart_toEndOf="@+id/contactNumberLabel"
+                app:layout_constraintTop_toTopOf="@+id/contactNumberLabel" />
+
+            <TextView
+                android:id="@+id/category"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="2dp"
+                android:elevation="5dp"
+                android:fontFamily="sans-serif-light"
+                android:letterSpacing="0.05"
+                android:text="@{license._category}"
+                android:textSize="8sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/license_category"
+                app:layout_constraintStart_toEndOf="@+id/license_category"
+                app:layout_constraintTop_toTopOf="@+id/license_category" />
+
+            <TextView
+                android:id="@+id/licenseNumber"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="2dp"
+                android:elevation="5dp"
+                android:fontFamily="sans-serif-light"
+                android:letterSpacing="0.05"
+                android:text="@{license._license_no}"
+                android:textSize="8sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/dlNumber"
+                app:layout_constraintStart_toEndOf="@+id/dlNumber"
+                app:layout_constraintTop_toTopOf="@id/dlNumber" />
+
+            <TextView
+                android:id="@+id/blood"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="2dp"
+                android:elevation="5dp"
+                android:fontFamily="sans-serif-light"
+                android:letterSpacing="0.05"
+                android:text="@{license._blood_group}"
+                android:textSize="8sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/bloodGroup"
+                app:layout_constraintStart_toEndOf="@+id/bloodGroup"
+                app:layout_constraintTop_toTopOf="@+id/bloodGroup" />
+
+            <TextView
+                android:id="@+id/doi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="2dp"
+                android:elevation="5dp"
+                android:fontFamily="sans-serif-light"
+                android:letterSpacing="0.05"
+                android:text="@{license._issue_date}"
+                android:textSize="8sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/dateOfIssue"
+                app:layout_constraintStart_toEndOf="@+id/dateOfIssue"
+                app:layout_constraintTop_toTopOf="@+id/dateOfIssue" />
+
+            <TextView
+                android:id="@+id/doe"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="2dp"
+                android:elevation="5dp"
+                android:fontFamily="sans-serif-light"
+                android:letterSpacing="0.05"
+                android:text="@{license._expiry_date}"
+                android:textSize="8sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/dateOfExpiry"
+                app:layout_constraintStart_toEndOf="@+id/dateOfExpiry"
+                app:layout_constraintTop_toTopOf="@+id/dateOfExpiry" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+            android:id="@+id/userInfoLabel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:fontFamily="monospace"
+            android:text="Note: This is just an demo license created as per your information found on the dotm."
+            android:textAlignment="center"
+            android:textSize="8sp"
+            android:textStyle="italic"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/constraintLayout"
+            app:layout_constraintStart_toStartOf="@+id/constraintLayout"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

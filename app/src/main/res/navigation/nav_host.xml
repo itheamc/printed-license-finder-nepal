@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.itheamc.licensefinder.ui.HomeFragment"
-        android:label="@string/license_finder"
+        android:label="@string/license_checker"
         tools:layout="@layout/fragment_home">
         <action
             android:id="@+id/action_homeFragment_to_searchFragment"
@@ -16,8 +16,28 @@
             app:enterAnim="@anim/slide_in"
             app:exitAnim="@anim/fade_out"
             app:popEnterAnim="@anim/fade_in"
-            app:popExitAnim="@anim/slide_out"
-            app:popUpToInclusive="false" />
+            app:popExitAnim="@anim/slide_out" />
+        <action
+            android:id="@+id/action_homeFragment_to_licenseFragment"
+            app:destination="@id/licenseFragment"
+            app:enterAnim="@anim/slide_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/slide_out" />
+        <action
+            android:id="@+id/action_homeFragment_to_noticeFragment"
+            app:destination="@id/noticeFragment"
+            app:enterAnim="@anim/slide_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/slide_out" />
+        <action
+            android:id="@+id/action_homeFragment_to_disclaimerFragment"
+            app:destination="@id/disclaimerFragment"
+            app:enterAnim="@anim/slide_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/slide_out" />
     </fragment>
     <fragment
         android:id="@+id/searchFragment"
@@ -44,13 +64,6 @@
             app:exitAnim="@anim/fade_out"
             app:popEnterAnim="@anim/fade_in"
             app:popExitAnim="@anim/slide_out" />
-        <action
-            android:id="@+id/action_resultsFragment_to_licenseFragment"
-            app:destination="@id/licenseFragment"
-            app:enterAnim="@anim/slide_in"
-            app:exitAnim="@anim/fade_out"
-            app:popEnterAnim="@anim/fade_in"
-            app:popExitAnim="@anim/slide_out" />
     </fragment>
     <fragment
         android:id="@+id/detailsFragment"
@@ -63,12 +76,23 @@
         android:label="Demo License"
         tools:layout="@layout/fragment_license" >
         <action
-            android:id="@+id/action_licenseFragment_to_detailsFragment"
-            app:destination="@id/detailsFragment"
+            android:id="@+id/action_licenseFragment_to_demoFragment"
+            app:destination="@id/demoFragment"
             app:enterAnim="@anim/slide_in"
             app:exitAnim="@anim/fade_out"
             app:popEnterAnim="@anim/fade_in"
-            app:popExitAnim="@anim/slide_out"
-            app:popUpTo="@id/resultsFragment" />
+            app:popExitAnim="@anim/slide_out" />
     </fragment>
+    <fragment
+        android:id="@+id/demoFragment"
+        android:name="com.itheamc.licensefinder.ui.DemoFragment"
+        android:label="Demo License"/>
+    <fragment
+        android:id="@+id/noticeFragment"
+        android:name="com.itheamc.licensefinder.ui.NoticeFragment"
+        android:label="Notice Fragment" />
+    <fragment
+        android:id="@+id/disclaimerFragment"
+        android:name="com.itheamc.licensefinder.ui.DisclaimerFragment"
+        android:label="Disclaimer Fragment" />
 </navigation>

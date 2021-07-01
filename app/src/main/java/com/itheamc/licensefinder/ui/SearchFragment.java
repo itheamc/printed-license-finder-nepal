@@ -2,29 +2,22 @@ package com.itheamc.licensefinder.ui;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.widget.SearchView;
-import androidx.core.content.ContextCompat;
 import androidx.core.os.HandlerCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
-
-import android.os.Handler;
-import android.os.Looper;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.view.inputmethod.InputMethodManager;
-import android.widget.Filter;
-import android.widget.Filterable;
-import android.widget.Toast;
 
 import com.itheamc.licensefinder.R;
 import com.itheamc.licensefinder.api.NetworkCallback;
@@ -76,39 +69,36 @@ public class SearchFragment extends Fragment implements NetworkCallback {
 
 
         // OnClickListener on findButton
-        searchBinding.findButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (!searchBinding.editTextName.getText().toString().trim().isEmpty() ||
-                        !searchBinding.editTextDlNo.getText().toString().trim().isEmpty()) {
+        searchBinding.findButton.setOnClickListener(v -> {
+            if (!searchBinding.editTextName.getText().toString().trim().isEmpty() ||
+                    !searchBinding.editTextDlNo.getText().toString().trim().isEmpty()) {
 
-                    String name = searchBinding.editTextName.getText().toString().trim();
-                    String dlNo = searchBinding.editTextDlNo.getText().toString().trim();
-                    if (!name.isEmpty()) {
-                        name = name.replace(" ", ",");
-                        if ((name.split(",")).length == 2) {
-                            name = name.replace(",", "  ");
-                        } else {
-                            name = name.replace(",", " ");
-                        }
-                    }
-                    Query query = new Query(
-                            name,
-                            dlNo
-                    );
-
-                    hideKeyboard();
-                    if (NetworkUtil.isConnected(requireContext())) {
-                        requestApi(query);
-                        searchBinding.progressBar.setVisibility(View.VISIBLE);
+                String name = searchBinding.editTextName.getText().toString().trim();
+                String dlNo = searchBinding.editTextDlNo.getText().toString().trim();
+                if (!name.isEmpty()) {
+                    name = name.replace(" ", ",");
+                    if ((name.split(",")).length == 2) {
+                        name = name.replace(",", "  ");
                     } else {
-                        Toast.makeText(getContext(), "You don't have active network connection.", Toast.LENGTH_LONG).show();
+                        name = name.replace(",", " ");
                     }
-                } else {
-                    Toast.makeText(getContext(), "Please input name or license number !!", Toast.LENGTH_LONG).show();
                 }
+                Query query = new Query(
+                        name,
+                        dlNo
+                );
 
+                hideKeyboard();
+                if (NetworkUtil.isConnected(requireContext())) {
+                    requestApi(query);
+                    searchBinding.progressBar.setVisibility(View.VISIBLE);
+                } else {
+                    Toast.makeText(getContext(), "You don't have active network connection.", Toast.LENGTH_LONG).show();
+                }
+            } else {
+                Toast.makeText(getContext(), "Please input name or license number !!", Toast.LENGTH_LONG).show();
             }
+
         });
     }
 

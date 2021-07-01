@@ -2,15 +2,6 @@ package com.itheamc.licensefinder.ui;
 
 import android.content.Context;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.widget.SearchView;
-import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -20,7 +11,14 @@ import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Filter;
 import android.widget.Filterable;
-import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.SearchView;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
@@ -32,7 +30,6 @@ import com.itheamc.licensefinder.adapters.LicenseAdapter;
 import com.itheamc.licensefinder.adapters.LicenseCallback;
 import com.itheamc.licensefinder.databinding.FragmentResultsBinding;
 import com.itheamc.licensefinder.models.License;
-import com.itheamc.licensefinder.utils.StorageUtility;
 import com.itheamc.licensefinder.viewmodel.SharedViewModel;
 
 import java.util.ArrayList;
@@ -118,17 +115,7 @@ public class ResultsFragment extends Fragment implements LicenseCallback, Filter
     public void onClick(int position) {
         License license = viewModel.getTempList().get(position);
         viewModel.setLicense(license);
-
-        if (StorageUtility.getLicenseNumber(requireActivity()) != null) {
-            if (StorageUtility.getLicenseNumber(requireActivity()).equals(license.get_license_no())) {
-                navController.navigate(R.id.action_resultsFragment_to_licenseFragment);
-            } else {
-                navController.navigate(R.id.action_resultsFragment_to_detailsFragment);
-            }
-        } else {
-            // Navigate to the Detail page
-            navController.navigate(R.id.action_resultsFragment_to_licenseFragment);
-        }
+        navController.navigate(R.id.action_resultsFragment_to_detailsFragment);
     }
 
 

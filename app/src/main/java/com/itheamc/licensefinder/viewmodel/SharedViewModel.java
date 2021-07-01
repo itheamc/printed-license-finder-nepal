@@ -11,6 +11,10 @@ public class SharedViewModel extends ViewModel {
     private List<License> licenseList;
     private List<License> tempList;
     private License license;
+    private String lcNo;
+    private String birthDate;
+    private boolean active = true;
+    private boolean fetched = false;
 
     // Getter and Setter for license List
     public List<License> getLicenseList() {
@@ -46,5 +50,39 @@ public class SharedViewModel extends ViewModel {
 
     public void setLicense(License license) {
         this.license = license;
+    }
+
+
+    public String getLcNo() {
+        return lcNo;
+    }
+
+    public void setLcNo(String lcNo) {
+        this.lcNo = lcNo;
+    }
+
+    public String getBirthDate() {
+        return birthDate;
+    }
+
+    public void setBirthDate(String birthDate) {
+        this.birthDate = birthDate;
+    }
+
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
+    public boolean isFetched() {
+        return fetched;
+    }
+
+    public void setFetched(boolean fetched) {
+        this.fetched = fetched;
     }
 }

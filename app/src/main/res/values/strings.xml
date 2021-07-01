@@ -10,11 +10,12 @@
     <string name="details">Details</string>
     <string name="results">Results</string>
     <string name="license_finder">License Finder</string>
+    <string name="license_checker">License Checker</string>
     <string name="code_with_by_itheamc">Code with ❤ by @itheamc</string>
     <string name="start_searching">Start Searching</string>
     <string name="welcome_text_one">Welcome</string>
     <string name="welcome_text_two">to</string>
-    <string name="welcome_text_three">@string/license_finder</string>
+    <string name="welcome_text_three">@string/license_checker</string>
     <string name="powered_by_dotm_nepal">Powered By DOTM, NEPAL</string>
 
     <string name="dlid">DLId</string>
@@ -23,10 +24,18 @@
     <string name="issuer">Issue Office</string>
     <string name="dispatch_date">Dispatch Date</string>
     <string name="banner_ad_unit_id">ca-app-pub-2718777519784278/7874206079</string>
+    <string name="intristitial_ad_unit_id">ca-app-pub-2718777519784278/4506068400</string>
     <string name="cancel">Cancel</string>
     <string name="ok">OK</string>
     <string name="date_of_birth">Date of Birth</string>
     <string name="nepal_govt">नेपाल सरकार</string>
-    <string name="government_of_nepal_en">GOVERNMENT OF NEPAL</string>
+    <string name="government_of_nepal_en" translatable="false">GOVERNMENT OF NEPAL</string>
     <string name="driving_lc">सवारी चालक आनुमतिपत्र</string>
+    <string name="please_enter_your_name_or_license_number_or_both_to_search_your_license_print_status">Please enter your name or license number or both to search your license print status.</string>
+    <string name="_10_jan_1996">10-Jan-1996</string>
+    <string name="demo_license">See Demo License</string>
+    <string name="generate">Generate</string>
+    <string name="_24_05_1997">24–05–1997</string>
+    <string name="disclaimer">Disclaimer</string>
+    <string name="privacy_policy">Privacy Policy</string>
 </resources>

@@ -1,38 +1,39 @@
 package com.itheamc.licensefinder.ui;
 
-import android.app.Dialog;
-import android.content.Context;
-import android.content.SharedPreferences;
-import android.os.Build;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-
-import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.DatePicker;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.itheamc.licensefinder.R;
-import com.itheamc.licensefinder.databinding.DatePickerViewBinding;
 import com.itheamc.licensefinder.databinding.FragmentHomeBinding;
-import com.itheamc.licensefinder.utils.StorageUtility;
+import com.itheamc.licensefinder.viewmodel.SharedViewModel;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Locale;
+import java.util.List;
 
 
 public class HomeFragment extends Fragment {
     private static final String TAG = "HomeFragment";
     private FragmentHomeBinding homeBinding;
     private NavController navController;
+    private FirebaseFirestore firestore;
+    private SharedViewModel viewModel;
+    private boolean is_fetching = false;
     private int y = 0;
     private int m = 0;
     private int d = 0;
@@ -55,63 +56,70 @@ public class HomeFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        viewModel = new ViewModelProvider(requireActivity()).get(SharedViewModel.class);
         navController = Navigation.findNavController(view);
+        firestore = FirebaseFirestore.getInstance();
 
+        homeBinding.navigateToSearch.setOnClickListener(this::fetchData);
 
-        homeBinding.navigateToSearch.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                navController.navigate(R.id.action_homeFragment_to_searchFragment);
-            }
-        });
+        homeBinding.navigateToLicense.setOnClickListener(this::fetchData);
 
+        homeBinding.disclaimer.setOnClickListener(v -> navController.navigate(R.id.action_homeFragment_to_disclaimerFragment));
 
-        if (StorageUtility.getBirthDate(requireActivity()) == null) {
-            showDatePicker();
-        }
     }
 
 
-    // Function to create custom dialog to edit wager amount
-    public void showDatePicker() {
-        // add listener to button
-        final Dialog dialog = new Dialog(getContext());   // Create custom dialog object
-        DatePickerViewBinding pickerViewBinding = DatePickerViewBinding.inflate(getLayoutInflater());
-        dialog.setContentView(pickerViewBinding.getRoot());
-        dialog.show();
 
-
-        y = pickerViewBinding.datePicker.getYear();
-        m = pickerViewBinding.datePicker.getMonth() + 1;
-        d = pickerViewBinding.datePicker.getDayOfMonth();
-
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            pickerViewBinding.datePicker.setOnDateChangedListener(new DatePicker.OnDateChangedListener() {
-                @Override
-                public void onDateChanged(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                    y = year;
-                    m = monthOfYear + 1;
-                    d = dayOfMonth;
-                    Log.d(TAG, "onDateChanged: " + y + "-" + m + "-" + d);
-                }
-            });
+    // Function to load data from the firestore database
+    private void fetchData(View view) {
+        if (is_fetching) {
+            return;
         }
+        if (viewModel.isFetched()) {
+            navigate(view);
+            return;
+        }
+        is_fetching = true;
+        firestore.collection("myapp")
+                .get()
+                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                    @Override
+                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                        is_fetching = false;
+                        if (queryDocumentSnapshots != null) {
+                            List<DocumentSnapshot> documentSnapshots = queryDocumentSnapshots.getDocuments();
+                            if (documentSnapshots.size() > 0) {
+                                viewModel.setActive(documentSnapshots.get(0).getBoolean("is_active"));
+                                viewModel.setFetched(true);
+                                navigate(view);
+                            }
+                        }
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull @NotNull Exception e) {
+                        is_fetching = false;
+                        if (view.getId() == homeBinding.navigateToSearch.getId()) {
+                            navController.navigate(R.id.action_homeFragment_to_searchFragment);
+                        } else {
+                            navController.navigate(R.id.action_homeFragment_to_licenseFragment);
+                        }
+                        Log.d(TAG, "onFailure: " + e.getMessage());
+                    }
+                });
+    }
 
-        pickerViewBinding.confirmButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                StorageUtility.setBirthDate(requireActivity(), y, m, d);
-                dialog.dismiss();
+    // Function to navigate to the another fragment as per the user click
+    private void navigate(View view) {
+        if (viewModel.isActive()) {
+            if (view.getId() == homeBinding.navigateToSearch.getId()) {
+                navController.navigate(R.id.action_homeFragment_to_searchFragment);
+            } else {
+                navController.navigate(R.id.action_homeFragment_to_licenseFragment);
             }
-        });
-
-        pickerViewBinding.cancelButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dialog.dismiss();
-            }
-        });
-
+        } else {
+            navController.navigate(R.id.action_homeFragment_to_noticeFragment);
+        }
     }
 }
