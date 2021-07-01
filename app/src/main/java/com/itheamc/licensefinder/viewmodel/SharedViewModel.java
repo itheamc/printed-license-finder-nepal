@@ -15,6 +15,7 @@ public class SharedViewModel extends ViewModel {
     private String birthDate;
     private boolean active = true;
     private boolean fetched = false;
+    private String url;
 
     // Getter and Setter for license List
     public List<License> getLicenseList() {
@@ -84,5 +85,14 @@ public class SharedViewModel extends ViewModel {
 
     public void setFetched(boolean fetched) {
         this.fetched = fetched;
+    }
+
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 }

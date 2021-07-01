@@ -33,7 +33,6 @@ public class HomeFragment extends Fragment {
     private static final String TAG = "HomeFragment";
     private FragmentHomeBinding homeBinding;
     private NavController navController;
-    private FirebaseFirestore firestore;
     private SharedViewModel viewModel;
     private boolean is_fetching = false;
     private int y = 0;
@@ -60,15 +59,20 @@ public class HomeFragment extends Fragment {
 
         viewModel = new ViewModelProvider(requireActivity()).get(SharedViewModel.class);
         navController = Navigation.findNavController(view);
-        firestore = FirebaseFirestore.getInstance();
 
         homeBinding.navigateToSearch.setOnClickListener(this::fetchData);
 
         homeBinding.navigateToLicense.setOnClickListener(this::fetchData);
 
-        homeBinding.disclaimer.setOnClickListener(v -> navController.navigate(R.id.action_homeFragment_to_disclaimerFragment));
+        homeBinding.disclaimer.setOnClickListener(v -> {
+            viewModel.setUrl("https://sites.google.com/view/license-checker/disclaimer");
+            navController.navigate(R.id.action_homeFragment_to_webFragment);
+        });
 
-        homeBinding.privacyPolicy.setOnClickListener(v -> navController.navigate(R.id.action_homeFragment_to_privacyFragment));
+        homeBinding.privacyPolicy.setOnClickListener(v -> {
+            viewModel.setUrl("https://sites.google.com/view/license-checker/privacy-policy");
+            navController.navigate(R.id.action_homeFragment_to_webFragment);
+        });
 
     }
 
@@ -84,7 +88,8 @@ public class HomeFragment extends Fragment {
             return;
         }
         is_fetching = true;
-        firestore.collection("myapp")
+        FirebaseFirestore.getInstance()
+                .collection("myapp")
                 .get()
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override

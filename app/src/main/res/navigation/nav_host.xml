@@ -32,15 +32,8 @@
             app:popEnterAnim="@anim/fade_in"
             app:popExitAnim="@anim/slide_out" />
         <action
-            android:id="@+id/action_homeFragment_to_disclaimerFragment"
-            app:destination="@id/disclaimerFragment"
-            app:enterAnim="@anim/slide_in"
-            app:exitAnim="@anim/fade_out"
-            app:popEnterAnim="@anim/fade_in"
-            app:popExitAnim="@anim/slide_out" />
-        <action
-            android:id="@+id/action_homeFragment_to_privacyFragment"
-            app:destination="@id/privacyFragment"
+            android:id="@+id/action_homeFragment_to_webFragment"
+            app:destination="@id/webFragment"
             app:enterAnim="@anim/slide_in"
             app:exitAnim="@anim/fade_out"
             app:popEnterAnim="@anim/fade_in"
@@ -99,12 +92,8 @@
         android:name="com.itheamc.licensefinder.ui.NoticeFragment"
         android:label="Notice" />
     <fragment
-        android:id="@+id/disclaimerFragment"
-        android:name="com.itheamc.licensefinder.ui.DisclaimerFragment"
-        android:label="Disclaimer" />
-    <fragment
-        android:id="@+id/privacyFragment"
-        android:name="com.itheamc.licensefinder.ui.PrivacyFragment"
-        android:label="Privacy Policy"
-        tools:layout="@layout/fragment_privacy" />
+        android:id="@+id/webFragment"
+        android:name="com.itheamc.licensefinder.ui.WebFragment"
+        android:label="Webview"
+        tools:layout="@layout/fragment_web" />
 </navigation>
