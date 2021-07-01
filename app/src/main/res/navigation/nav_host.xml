@@ -38,6 +38,13 @@
             app:exitAnim="@anim/fade_out"
             app:popEnterAnim="@anim/fade_in"
             app:popExitAnim="@anim/slide_out" />
+        <action
+            android:id="@+id/action_homeFragment_to_privacyFragment"
+            app:destination="@id/privacyFragment"
+            app:enterAnim="@anim/slide_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/slide_out" />
     </fragment>
     <fragment
         android:id="@+id/searchFragment"
@@ -73,8 +80,8 @@
     <fragment
         android:id="@+id/licenseFragment"
         android:name="com.itheamc.licensefinder.ui.LicenseFragment"
-        android:label="Demo License"
-        tools:layout="@layout/fragment_license" >
+        android:label="License"
+        tools:layout="@layout/fragment_license">
         <action
             android:id="@+id/action_licenseFragment_to_demoFragment"
             app:destination="@id/demoFragment"
@@ -90,9 +97,14 @@
     <fragment
         android:id="@+id/noticeFragment"
         android:name="com.itheamc.licensefinder.ui.NoticeFragment"
-        android:label="Notice Fragment" />
+        android:label="Notice" />
     <fragment
         android:id="@+id/disclaimerFragment"
         android:name="com.itheamc.licensefinder.ui.DisclaimerFragment"
-        android:label="Disclaimer Fragment" />
+        android:label="Disclaimer" />
+    <fragment
+        android:id="@+id/privacyFragment"
+        android:name="com.itheamc.licensefinder.ui.PrivacyFragment"
+        android:label="Privacy Policy"
+        tools:layout="@layout/fragment_privacy" />
 </navigation>

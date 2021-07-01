@@ -5,6 +5,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebChromeClient;
+import android.webkit.WebView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -65,6 +67,8 @@ public class HomeFragment extends Fragment {
         homeBinding.navigateToLicense.setOnClickListener(this::fetchData);
 
         homeBinding.disclaimer.setOnClickListener(v -> navController.navigate(R.id.action_homeFragment_to_disclaimerFragment));
+
+        homeBinding.privacyPolicy.setOnClickListener(v -> navController.navigate(R.id.action_homeFragment_to_privacyFragment));
 
     }
 

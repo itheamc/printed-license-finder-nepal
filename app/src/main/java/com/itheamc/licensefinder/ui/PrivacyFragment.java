@@ -1,19 +1,21 @@
 package com.itheamc.licensefinder.ui;
 
 import android.os.Bundle;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.itheamc.licensefinder.databinding.FragmentDisclaimerBinding;
+import com.itheamc.licensefinder.R;
+import com.itheamc.licensefinder.databinding.FragmentPrivacyBinding;
 import com.itheamc.licensefinder.models.Disclaimer;
 
 import org.jetbrains.annotations.NotNull;
@@ -21,12 +23,12 @@ import org.jetbrains.annotations.NotNull;
 import java.util.List;
 
 
-public class DisclaimerFragment extends Fragment {
-    private static final String TAG = "DisclaimerFragment";
-    private FragmentDisclaimerBinding disclaimerBinding;
+public class PrivacyFragment extends Fragment {
+    private static final String TAG = "PrivacyFragment";
+    private FragmentPrivacyBinding privacyBinding;
 
 
-    public DisclaimerFragment() {
+    public PrivacyFragment() {
         // Required empty public constructor
     }
 
@@ -37,11 +39,11 @@ public class DisclaimerFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(@NotNull LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        disclaimerBinding = FragmentDisclaimerBinding.inflate(inflater, container, false);
-        return disclaimerBinding.getRoot();
+        privacyBinding = FragmentPrivacyBinding.inflate(inflater, container, false);
+        return privacyBinding.getRoot();
     }
 
     @Override
@@ -55,15 +57,15 @@ public class DisclaimerFragment extends Fragment {
     // Function to load data from the firestore database
     private void fetchData() {
         FirebaseFirestore.getInstance()
-                .collection("disclaimers")
+                .collection("privacy_policy")
                 .get()
                 .addOnSuccessListener(queryDocumentSnapshots -> {
                     if (queryDocumentSnapshots != null) {
                         List<DocumentSnapshot> documentSnapshots = queryDocumentSnapshots.getDocuments();
                         if (documentSnapshots.size() > 0) {
-                            Disclaimer disclaimer = documentSnapshots.get(0).toObject(Disclaimer.class);
-                            assert disclaimer != null;
-                            disclaimerBinding.webview.loadData(disclaimer.getDisclaimer(), "text/html; charset=utf-8", "UTF-8");
+                            String privacy = documentSnapshots.get(0).getString("privacy");
+                            assert privacy != null;
+                            privacyBinding.privacyWebView.loadData(privacy, "text/html; charset=utf-8", "UTF-8");
                         }
                     }
                 })
