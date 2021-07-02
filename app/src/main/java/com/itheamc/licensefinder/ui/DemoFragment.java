@@ -28,7 +28,6 @@ import com.itheamc.licensefinder.databinding.FragmentDemoBinding;
 import com.itheamc.licensefinder.models.License;
 import com.itheamc.licensefinder.models.User;
 import com.itheamc.licensefinder.utils.FormatDate;
-import com.itheamc.licensefinder.utils.StorageUtility;
 import com.itheamc.licensefinder.viewmodel.SharedViewModel;
 
 import org.jsoup.Jsoup;
@@ -107,7 +106,11 @@ public class DemoFragment extends Fragment {
 
         // FOR GETTING USER INFO
         if (viewModel.getLcNo() != null && viewModel.getBirthDate() != null) {
-            fetchBasicInfo(client, FormatDate.format(viewModel.getBirthDate()), viewModel.getLcNo());
+            if (viewModel.getLicense() == null || viewModel.getLicense().get_image() == null) {
+                fetchBasicInfo(client, FormatDate.format(viewModel.getBirthDate()), viewModel.getLcNo());
+            } else {
+                demoBinding.setLicense(viewModel.getLicense());
+            }
         } else {
             notifyFailure("Something went wrong!!");
         }
@@ -277,8 +280,7 @@ public class DemoFragment extends Fragment {
             demoBinding.constraintLayout.setVisibility(View.VISIBLE);
             demoBinding.userInfoLabel.setVisibility(View.VISIBLE);
             demoBinding.setLicense(license);
-            StorageUtility.setLicenseNumber(requireActivity(), license.get_license_no());
-            Log.d(TAG, "run: " + license.toString());
+            viewModel.setLicense(license);
         });
 
     }

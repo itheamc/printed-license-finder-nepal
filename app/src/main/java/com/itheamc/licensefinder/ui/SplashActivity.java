@@ -1,6 +1,7 @@
 package com.itheamc.licensefinder.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -18,6 +19,8 @@ public class SplashActivity extends AppCompatActivity {
         splashBinding = ActivitySplashBinding.inflate(getLayoutInflater());
         setContentView(splashBinding.getRoot());
 
+        adoptUserTheme();
+
         new Handler().postDelayed(this::startMainActivity, 1500);
     }
 
@@ -27,4 +30,14 @@ public class SplashActivity extends AppCompatActivity {
         startActivity(intent);
         finish();
     }
+
+    /**
+     * Creating the function to change app theme as per the user setting
+     * Dark Mode
+     * or Light mode
+     */
+    private void adoptUserTheme() {
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+    }
+
 }

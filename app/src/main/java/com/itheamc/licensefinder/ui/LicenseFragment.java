@@ -1,12 +1,17 @@
 package com.itheamc.licensefinder.ui;
 
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.databinding.adapters.TextViewBindingAdapter;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
@@ -52,6 +57,7 @@ public class LicenseFragment extends Fragment {
 
         licenseBinding.generateDemoButton.setOnClickListener(v -> handleGenerateButton());
 
+        handleTextChange();
     }
 
     // Function to handle generate button click
@@ -120,6 +126,67 @@ public class LicenseFragment extends Fragment {
     }
 
 
+    /**
+     * ------------------------------------------------------------------
+     * ---------------Function to handle text change---------------------
+     */
 
+    private void handleTextChange() {
+        // DlcNo TEXT CHANGE
+        licenseBinding.editTextDlcNo.addTextChangedListener(new TextWatcher() {
+            int last_count = 0;
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                Log.d(TAG, "onTextChanged: " + s.length());
+                if (last_count < s.length()) {
+                    if (s.length() == 2 || s.length() == 5) {
+                        licenseBinding.editTextDlcNo.setText(String.format("%s-", s));
+                        licenseBinding.editTextDlcNo.setSelection(licenseBinding.editTextDlcNo.getText().length());
+                    }
+                }
+
+                last_count = licenseBinding.editTextDlcNo.getText().length();
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                Log.d(TAG, "afterTextChanged: ");
+            }
+        });
+
+        // DOB TEXT CHANGE
+        licenseBinding.editTextBirthDate.addTextChangedListener(new TextWatcher() {
+            int last_count = 0;
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                Log.d(TAG, "onTextChanged: " + s.length());
+                if (last_count < s.length()) {
+                    if (s.length() == 2 || s.length() == 5) {
+                        licenseBinding.editTextBirthDate.setText(String.format("%s-", s));
+                        licenseBinding.editTextBirthDate.setSelection(licenseBinding.editTextBirthDate.getText().length());
+                    }
+                }
+
+                last_count = licenseBinding.editTextBirthDate.getText().length();
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                Log.d(TAG, "afterTextChanged: ");
+            }
+        });
+    }
 
 }
