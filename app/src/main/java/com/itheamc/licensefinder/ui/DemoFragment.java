@@ -94,8 +94,6 @@ public class DemoFragment extends Fragment {
 
         OkHttpClient client = new OkHttpClient();
 
-        demoBinding.progressBar.setVisibility(View.VISIBLE);
-
         // FOR AD
         AdRequest adRequest = new AdRequest.Builder().build();
         if (generateRandInt() > 0) {
@@ -106,10 +104,11 @@ public class DemoFragment extends Fragment {
 
         // FOR GETTING USER INFO
         if (viewModel.getLcNo() != null && viewModel.getBirthDate() != null) {
-            if (viewModel.getLicense() == null || viewModel.getLicense().get_image() == null) {
+            if (viewModel.getLicense() == null || viewModel.getLicense().get_image() == null || !viewModel.getLicense().get_license_no().equals(viewModel.getLcNo())) {
+                demoBinding.progressBar.setVisibility(View.VISIBLE);
                 fetchBasicInfo(client, FormatDate.format(viewModel.getBirthDate()), viewModel.getLcNo());
             } else {
-                demoBinding.setLicense(viewModel.getLicense());
+                displayLicense(viewModel.getLicense());
             }
         } else {
             notifyFailure("Something went wrong!!");
@@ -276,10 +275,7 @@ public class DemoFragment extends Fragment {
                 else if (i == 24) license.set_issuer(userData.get(i).getKey());
             }
 
-            demoBinding.progressBar.setVisibility(View.GONE);
-            demoBinding.constraintLayout.setVisibility(View.VISIBLE);
-            demoBinding.userInfoLabel.setVisibility(View.VISIBLE);
-            demoBinding.setLicense(license);
+            displayLicense(license);
             viewModel.setLicense(license);
         });
 
@@ -294,6 +290,15 @@ public class DemoFragment extends Fragment {
             Toast.makeText(getContext(), "Sorry!!, we are unable to create. Please check your details", Toast.LENGTH_LONG).show();
             Log.d(TAG, "run: " + message);
         });
+    }
+
+
+    // Function to hide progress bar and display the license
+    private void displayLicense(License license) {
+        demoBinding.progressBar.setVisibility(View.GONE);
+        demoBinding.constraintLayout.setVisibility(View.VISIBLE);
+        demoBinding.userInfoLabel.setVisibility(View.VISIBLE);
+        demoBinding.setLicense(license);
     }
 
 

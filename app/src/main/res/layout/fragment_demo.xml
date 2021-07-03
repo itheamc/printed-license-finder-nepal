@@ -13,6 +13,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@android:color/background_dark"
         tools:context=".ui.DemoFragment">
 
         <ProgressBar
@@ -285,7 +286,7 @@
                 android:layout_height="80dp"
                 android:layout_marginTop="14dp"
                 android:layout_marginEnd="16dp"
-                android:background="#FFFFFF"
+                android:background="#BFFFFFFF"
                 android:imageUrl="@{license._image}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/npFlag"
@@ -551,6 +552,7 @@
             android:fontFamily="monospace"
             android:text="Note: This is just an demo license created as per your information found on the dotm."
             android:textAlignment="center"
+            android:textColor="@color/white"
             android:textSize="8sp"
             android:textStyle="italic"
             android:visibility="invisible"
