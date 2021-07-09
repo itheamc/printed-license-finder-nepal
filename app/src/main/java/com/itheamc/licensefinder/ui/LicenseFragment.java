@@ -7,11 +7,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.databinding.adapters.TextViewBindingAdapter;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
@@ -19,6 +18,7 @@ import androidx.navigation.Navigation;
 
 import com.itheamc.licensefinder.R;
 import com.itheamc.licensefinder.databinding.FragmentLicenseBinding;
+import com.itheamc.licensefinder.utils.NetworkUtil;
 import com.itheamc.licensefinder.viewmodel.SharedViewModel;
 
 
@@ -62,6 +62,10 @@ public class LicenseFragment extends Fragment {
 
     // Function to handle generate button click
     private void handleGenerateButton() {
+        if (getContext() == null) {
+            return;
+        }
+        // If context is not null
         String licNo = licenseBinding.editTextDlcNo.getText().toString();
         String dob = licenseBinding.editTextBirthDate.getText().toString();
 
@@ -117,6 +121,10 @@ public class LicenseFragment extends Fragment {
             return;
         }
 
+        if (!NetworkUtil.isConnected(getContext())) {
+            Toast.makeText(getContext(), "No internet", Toast.LENGTH_SHORT).show();
+            return;
+        }
 
 
         viewModel.setLcNo(licNo);

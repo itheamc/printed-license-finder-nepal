@@ -1,8 +1,6 @@
 package com.itheamc.licensefinder.ui;
 
-import android.app.Application;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -11,8 +9,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.WebChromeClient;
-import android.webkit.WebView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -28,6 +25,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.itheamc.licensefinder.R;
 import com.itheamc.licensefinder.databinding.FragmentHomeBinding;
+import com.itheamc.licensefinder.utils.NetworkUtil;
 import com.itheamc.licensefinder.viewmodel.SharedViewModel;
 
 import org.jetbrains.annotations.NotNull;
@@ -88,9 +86,16 @@ public class HomeFragment extends Fragment {
     }
 
 
-
     // Function to load data from the firestore database
     private void fetchData(View view) {
+        if (getContext() == null) {
+            return;
+        }
+
+        if (!NetworkUtil.isConnected(getContext())) {
+            Toast.makeText(getContext(), "No internet", Toast.LENGTH_SHORT).show();
+            return;
+        }
         if (is_fetching) {
             return;
         }
