@@ -253,46 +253,57 @@ public class DemoFragment extends Fragment {
 
     // Function to notify success
     private void notifySuccess(List<User> userData) {
-        handler.post(() -> {
-            License license = new License();
-            for (int i = 0; i < userData.size(); i++) {
-                if (i == 0) license.set_citizenship_no(userData.get(i).getValue());
-                if (i == 1) license.set_image(Urls.SUBDOMAIN_BASE_URL + userData.get(i).getValue());
-                else if(i == 3) license.set_license_no(userData.get(i).getValue());
-                else if (i == 4) license.set_name(userData.get(i).getValue());
-                else if (i == 7) license.set_dob_ad(FormatDate.format2(userData.get(i).getValue()));
-                else if (i == 8) license.set_blood_group(userData.get(i).getValue());
-                else if (i == 10) license.set_ward_number(userData.get(i).getValue());
-                else if (i == 11) license.set_tole(userData.get(i).getValue());
-                else if (i == 13) license.set_zone(userData.get(i).getValue());
-                else if (i == 14) license.set_district(userData.get(i).getValue());
-                else if (i == 15) license.set_municipality(userData.get(i).getValue());
-                else if (i == 22) license.set_issue_date(FormatDate.format2(userData.get(i).getValue().substring(0, 11)));
-                else if (i == 23)  {
-                    license.set_expiry_date(FormatDate.format2(userData.get(i).getKey().substring(0, 11)));
-                    license.set_category(userData.get(i).getValue().split("-")[0]);
+        try {
+            handler.post(() -> {
+                License license = new License();
+                for (int i = 0; i < userData.size(); i++) {
+                    if (i == 0) license.set_citizenship_no(userData.get(i).getValue());
+                    if (i == 1) license.set_image(Urls.SUBDOMAIN_BASE_URL + userData.get(i).getValue());
+                    else if(i == 3) license.set_license_no(userData.get(i).getValue());
+                    else if (i == 4) license.set_name(userData.get(i).getValue());
+                    else if (i == 7) license.set_dob_ad(FormatDate.format2(userData.get(i).getValue()));
+                    else if (i == 8) license.set_blood_group(userData.get(i).getValue());
+                    else if (i == 10) license.set_ward_number(userData.get(i).getValue());
+                    else if (i == 11) license.set_tole(userData.get(i).getValue());
+                    else if (i == 13) license.set_zone(userData.get(i).getValue());
+                    else if (i == 14) license.set_district(userData.get(i).getValue());
+                    else if (i == 15) license.set_municipality(userData.get(i).getValue());
+                    else if (i == 22) license.set_issue_date(FormatDate.format2(userData.get(i).getValue().substring(0, 11)));
+                    else if (i == 23)  {
+                        license.set_expiry_date(FormatDate.format2(userData.get(i).getKey().substring(0, 11)));
+                        license.set_category(userData.get(i).getValue().split("-")[0]);
+                    }
+                    else if (i == 24) license.set_issuer(userData.get(i).getKey());
                 }
-                else if (i == 24) license.set_issuer(userData.get(i).getKey());
-            }
 
-            displayLicense(license);
-            viewModel.setLicense(license);
-        });
+                displayLicense(license);
+                viewModel.setLicense(license);
+            });
+        } catch (Exception e) {
+            Log.d(TAG, "notifySuccess: "+ e.getMessage());
+        }
 
     }
 
     // Function to notify failure
     private void notifyFailure(String message) {
-        handler.post(() -> {
-            if(getContext() == null) {
-                return;
-            }
-            if (demoBinding.progressBar.getVisibility() == View.VISIBLE) {
-                demoBinding.progressBar.setVisibility(View.GONE);
-            }
-            Toast.makeText(getContext(), "Sorry!!, we are unable to create. Please check your details", Toast.LENGTH_LONG).show();
-            Log.d(TAG, "run: " + message);
-        });
+
+        try {
+            handler.post(() -> {
+                if(getContext() == null) {
+                    return;
+                }
+                if (demoBinding.progressBar.getVisibility() == View.VISIBLE) {
+                    demoBinding.progressBar.setVisibility(View.GONE);
+                }
+                Toast.makeText(getContext(), "Sorry!!, we are unable to create. Please check your details", Toast.LENGTH_LONG).show();
+                Log.d(TAG, "run: " + message);
+            });
+        } catch (Exception e) {
+            Log.d(TAG, "notifyFailure: "+ e.getMessage());
+        }
+
+
     }
 
 
