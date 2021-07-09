@@ -284,6 +284,9 @@ public class DemoFragment extends Fragment {
     // Function to notify failure
     private void notifyFailure(String message) {
         handler.post(() -> {
+            if(getContext() == null) {
+                return;
+            }
             if (demoBinding.progressBar.getVisibility() == View.VISIBLE) {
                 demoBinding.progressBar.setVisibility(View.GONE);
             }
