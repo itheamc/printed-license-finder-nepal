@@ -1,8 +1,14 @@
 package com.itheamc.licensefinder.ui;
 
+import android.app.Application;
+import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebChromeClient;
@@ -44,6 +50,11 @@ public class HomeFragment extends Fragment {
         // Required empty public constructor
     }
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
+    }
 
     @Override
     public View onCreateView(@NotNull LayoutInflater inflater, ViewGroup container,
@@ -130,5 +141,35 @@ public class HomeFragment extends Fragment {
         } else {
             navController.navigate(R.id.action_homeFragment_to_noticeFragment);
         }
+    }
+
+    /**
+     * FUnction overrided to handle the action menu
+     * @param menu --
+     * @param inflater --
+     */
+
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.share_action_menu, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == R.id.share_menu) {
+            handleShare();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    // Function to handle share
+    private void handleShare() {
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.setType("text/plain");
+        intent.putExtra(Intent.EXTRA_SUBJECT, "Hey, Have you ever checked this app?");
+        intent.putExtra(Intent.EXTRA_TEXT, "के तपाई स्मार्ट लाइसेन्सको पर्खाईमा हुनुहुन्छ।  येदि हुनुहुन्छ भने आफ्नो लाइसेन्स प्रिन्ट भए नभएको थाहपाउन र  आफ्नो डेमो स्मार्ट लाइसेन्स हेर्न यो एप download गर्नुहोस। --> https://play.google.com/store/apps/details?id=com.itheamc.licensefinder");
+        startActivity(Intent.createChooser(intent, "Share License Checker With"));
     }
 }
