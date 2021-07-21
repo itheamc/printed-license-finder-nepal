@@ -59,6 +59,7 @@ public class DemoFragment extends Fragment {
     private NavController navController;
     private SharedViewModel viewModel;
     private InterstitialAd mInterstitialAd;
+    private AdRequest adRequest;
 
 
 
@@ -95,10 +96,8 @@ public class DemoFragment extends Fragment {
         OkHttpClient client = new OkHttpClient();
 
         // FOR AD
-        AdRequest adRequest = new AdRequest.Builder().build();
-        if (generateRandInt() > 0) {
-            requestInterstitialAds(adRequest);
-        }
+        adRequest = new AdRequest.Builder().build();
+
 
 
 
@@ -278,6 +277,9 @@ public class DemoFragment extends Fragment {
 
                 displayLicense(license);
                 viewModel.setLicense(license);
+                if (generateRandInt() > 0) {
+                    requestInterstitialAds();
+                }
             });
         } catch (Exception e) {
             Log.d(TAG, "notifySuccess: "+ e.getMessage());
@@ -322,7 +324,7 @@ public class DemoFragment extends Fragment {
      * -------------------------FOR INTERSTITIAL ADS-----------------------
      */
     // Load interstitial ads
-    private void requestInterstitialAds(AdRequest adRequest) {
+    private void requestInterstitialAds() {
         if (getContext() == null) {
             return;
         }

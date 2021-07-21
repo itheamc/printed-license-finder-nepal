@@ -550,7 +550,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
             android:fontFamily="monospace"
-            android:text="Note: This is just an demo license created as per your information found on the dotm."
+            android:text="Note: This is just a demo license created as per your information found on the dotm."
             android:textAlignment="center"
             android:textColor="@color/white"
             android:textSize="8sp"
