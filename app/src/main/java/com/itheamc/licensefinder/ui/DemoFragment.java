@@ -252,6 +252,7 @@ public class DemoFragment extends Fragment {
 
     // Function to notify success
     private void notifySuccess(List<User> userData) {
+        if (demoBinding == null) return;
         try {
             handler.post(() -> {
                 License license = new License();
@@ -289,7 +290,7 @@ public class DemoFragment extends Fragment {
 
     // Function to notify failure
     private void notifyFailure(String message) {
-
+        if (demoBinding == null) return;
         try {
             handler.post(() -> {
                 if(getContext() == null) {
@@ -367,5 +368,12 @@ public class DemoFragment extends Fragment {
         Random random = new Random();
         int rand = random.nextInt(100);
         return rand % 3;
+    }
+
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        demoBinding = null;
     }
 }

@@ -1,5 +1,7 @@
 package com.itheamc.licensefinder.utils;
 
+import java.util.Date;
+
 public class FormatDate {
 
     /**
@@ -94,5 +96,20 @@ public class FormatDate {
                 return "12";
         }
         return "00";
+    }
+
+
+    /**
+     * Function to find the difference between two days
+     */
+    // Function to calc date diff
+    public static long timeDifference(long past_time_in_milliseconds) {
+        long recent_time = new Date().getTime();
+        long mills_diff = recent_time - past_time_in_milliseconds;
+        long seconds_diff = mills_diff / 1000;
+        long minutes_diff = seconds_diff / 60;
+        long hours_diff = minutes_diff / 60;
+
+        return hours_diff / 24;
     }
 }

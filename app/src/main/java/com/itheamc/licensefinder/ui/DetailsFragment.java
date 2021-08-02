@@ -44,4 +44,11 @@ public class DetailsFragment extends Fragment {
         viewModel = new ViewModelProvider(requireActivity()).get(SharedViewModel.class);
         detailsBinding.setLicense(viewModel.getLicense());
     }
+
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        detailsBinding = null;
+    }
 }

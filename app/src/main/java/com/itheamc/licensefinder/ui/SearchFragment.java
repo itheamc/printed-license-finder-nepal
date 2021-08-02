@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -52,7 +53,7 @@ public class SearchFragment extends Fragment implements NetworkCallback {
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         searchBinding = FragmentSearchBinding.inflate(inflater, container, false);
@@ -70,11 +71,13 @@ public class SearchFragment extends Fragment implements NetworkCallback {
 
         // OnClickListener on findButton
         searchBinding.findButton.setOnClickListener(v -> {
-            if (!searchBinding.editTextName.getText().toString().trim().isEmpty() ||
-                    !searchBinding.editTextDlNo.getText().toString().trim().isEmpty()) {
+            String name = searchBinding.editTextName.getText().toString().trim();
+            String dlNo = searchBinding.editTextDlNo.getText().toString().trim();
 
-                String name = searchBinding.editTextName.getText().toString().trim();
-                String dlNo = searchBinding.editTextDlNo.getText().toString().trim();
+            if (!TextUtils.isEmpty(name) ||
+                    !TextUtils.isEmpty(dlNo)) {
+
+
                 if (!name.isEmpty()) {
                     name = name.replace(" ", ",");
                     if ((name.split(",")).length == 2) {
@@ -92,6 +95,7 @@ public class SearchFragment extends Fragment implements NetworkCallback {
                 if (NetworkUtil.isConnected(requireContext())) {
                     requestApi(query);
                     searchBinding.progressBar.setVisibility(View.VISIBLE);
+                    searchBinding.findButton.setEnabled(false);
                 } else {
                     Toast.makeText(getContext(), "You don't have active network connection.", Toast.LENGTH_LONG).show();
                 }
@@ -117,13 +121,17 @@ public class SearchFragment extends Fragment implements NetworkCallback {
     // Overrided method from Network Callback
     @Override
     public void onSuccess(JSONArray jsonArray) {
+        if (searchBinding == null) return;
         searchBinding.progressBar.setVisibility(View.GONE);
+        searchBinding.findButton.setEnabled(true);
         createList(jsonArray);
     }
 
     @Override
     public void onFailure(String error) {
+        if (searchBinding == null) return;
         searchBinding.progressBar.setVisibility(View.GONE);
+        searchBinding.findButton.setEnabled(true);
         Toast.makeText(requireContext(), "Something went wrong!!", Toast.LENGTH_SHORT).show();
         Log.d(TAG, "onFailure: " + error);
     }
@@ -169,4 +177,9 @@ public class SearchFragment extends Fragment implements NetworkCallback {
 
     }
 
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        searchBinding = null;
+    }
 }

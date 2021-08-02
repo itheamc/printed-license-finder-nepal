@@ -96,18 +96,19 @@ public class ResultsFragment extends Fragment implements LicenseCallback, Filter
 
     // Function to load ads
     private void loadAds() {
-        if (getContext() != null) {
-            MobileAds.initialize(getContext(), new OnInitializationCompleteListener() {
-                @Override
-                public void onInitializationComplete(InitializationStatus initializationStatus) {
-                    Log.d(TAG, "onInitializationComplete: " + initializationStatus.toString());
-                }
-            });
+        if (getContext() == null) return;
 
-            mAdView = resultsBinding.bannerAdView;
-            AdRequest adRequest = new AdRequest.Builder().build();
-            mAdView.loadAd(adRequest);
-        }
+        MobileAds.initialize(getContext(), new OnInitializationCompleteListener() {
+            @Override
+            public void onInitializationComplete(@NonNull InitializationStatus initializationStatus) {
+                Log.d(TAG, "onInitializationComplete: " + initializationStatus.toString());
+            }
+        });
+
+        mAdView = resultsBinding.bannerAdView;
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+
     }
 
 
@@ -184,5 +185,11 @@ public class ResultsFragment extends Fragment implements LicenseCallback, Filter
 
         }
     };
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        resultsBinding = null;
+    }
 
 }

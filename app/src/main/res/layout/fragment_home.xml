@@ -67,7 +67,7 @@
             android:layout_height="wrap_content"
             android:paddingLeft="24dp"
             android:paddingRight="24dp"
-            android:text="@string/start_searching"
+            android:text="@string/check_print_status"
             android:textColor="@color/purple_200"
             app:cornerRadius="24dp"
             app:strokeColor="@color/purple_200" />

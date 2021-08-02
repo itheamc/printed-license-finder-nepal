@@ -197,4 +197,11 @@ public class LicenseFragment extends Fragment {
         });
     }
 
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        licenseBinding = null;
+    }
+
 }

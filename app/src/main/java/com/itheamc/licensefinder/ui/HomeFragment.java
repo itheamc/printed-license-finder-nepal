@@ -1,5 +1,8 @@
 package com.itheamc.licensefinder.ui;
 
+import static com.itheamc.licensefinder.api.Urls.DISCLAIMER_URL;
+import static com.itheamc.licensefinder.api.Urls.PRIVACY_POLICY_URL;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -25,11 +28,14 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.itheamc.licensefinder.R;
 import com.itheamc.licensefinder.databinding.FragmentHomeBinding;
+import com.itheamc.licensefinder.utils.FormatDate;
 import com.itheamc.licensefinder.utils.NetworkUtil;
+import com.itheamc.licensefinder.utils.StorageUtil;
 import com.itheamc.licensefinder.viewmodel.SharedViewModel;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Date;
 import java.util.List;
 
 
@@ -39,9 +45,6 @@ public class HomeFragment extends Fragment {
     private NavController navController;
     private SharedViewModel viewModel;
     private boolean is_fetching = false;
-    private int y = 0;
-    private int m = 0;
-    private int d = 0;
 
 
     public HomeFragment() {
@@ -69,20 +72,52 @@ public class HomeFragment extends Fragment {
         viewModel = new ViewModelProvider(requireActivity()).get(SharedViewModel.class);
         navController = Navigation.findNavController(view);
 
-        homeBinding.navigateToSearch.setOnClickListener(this::fetchData);
+        homeBinding.navigateToSearch.setOnClickListener(v -> {
+            if (shouldFetch()) {
+                fetchData(v);
+                return;
+            }
+            navigate(v);
+        });
 
-        homeBinding.navigateToLicense.setOnClickListener(this::fetchData);
+        homeBinding.navigateToLicense.setOnClickListener(v -> {
+            if (shouldFetch()) {
+                fetchData(v);
+                return;
+            }
+            navigate(v);
+        });
 
         homeBinding.disclaimer.setOnClickListener(v -> {
-            viewModel.setUrl("https://sites.google.com/view/license-checker/disclaimer");
+            viewModel.setUrl(DISCLAIMER_URL);
             navController.navigate(R.id.action_homeFragment_to_webFragment);
         });
 
         homeBinding.privacyPolicy.setOnClickListener(v -> {
-            viewModel.setUrl("https://sites.google.com/view/license-checker/privacy-policy");
+            viewModel.setUrl(PRIVACY_POLICY_URL);
             navController.navigate(R.id.action_homeFragment_to_webFragment);
         });
 
+    }
+
+    // Function to check weather data should be fetched from the server or not
+    private boolean shouldFetch() {
+        if (getActivity() == null) return false;
+        StorageUtil storageUtil = StorageUtil.getInstance(getActivity());
+        boolean is_active = storageUtil.isActive();
+        long past_time = storageUtil.getDate();
+        long days =  FormatDate.timeDifference(past_time);
+
+        if (is_active) {
+            if (days > 7) {
+                StorageUtil.getInstance(getActivity()).storeDate(new Date().getTime());
+                return true;
+            }
+            viewModel.setActive(true);
+            return false;
+        }
+
+        return true;
     }
 
 
@@ -110,11 +145,14 @@ public class HomeFragment extends Fragment {
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override
                     public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                        if (homeBinding == null) return;
                         is_fetching = false;
                         if (queryDocumentSnapshots != null) {
                             List<DocumentSnapshot> documentSnapshots = queryDocumentSnapshots.getDocuments();
                             if (documentSnapshots.size() > 0) {
-                                viewModel.setActive(documentSnapshots.get(0).getBoolean("is_active"));
+                                boolean status = documentSnapshots.get(0).getBoolean("is_active");
+                                viewModel.setActive(status);
+                                if (getActivity() != null) StorageUtil.getInstance(getActivity()).setActive(status);
                                 viewModel.setFetched(true);
                                 navigate(view);
                             }
@@ -124,6 +162,7 @@ public class HomeFragment extends Fragment {
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull @NotNull Exception e) {
+                        if (homeBinding == null) return;
                         is_fetching = false;
                         if (view.getId() == homeBinding.navigateToSearch.getId()) {
                             navController.navigate(R.id.action_homeFragment_to_searchFragment);
@@ -176,5 +215,11 @@ public class HomeFragment extends Fragment {
         intent.putExtra(Intent.EXTRA_SUBJECT, "Hey, Have you ever checked this app?");
         intent.putExtra(Intent.EXTRA_TEXT, "के तपाई स्मार्ट लाइसेन्सको पर्खाईमा हुनुहुन्छ।  येदि हुनुहुन्छ भने आफ्नो लाइसेन्स प्रिन्ट भए नभएको थाहपाउन र  आफ्नो डेमो स्मार्ट लाइसेन्स हेर्न यो एप download गर्नुहोस। --> https://play.google.com/store/apps/details?id=com.itheamc.licensefinder");
         startActivity(Intent.createChooser(intent, "Share License Checker With"));
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        homeBinding = null;
     }
 }

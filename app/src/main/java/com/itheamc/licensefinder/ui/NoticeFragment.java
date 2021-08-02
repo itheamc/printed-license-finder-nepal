@@ -71,7 +71,7 @@ public class NoticeFragment extends Fragment {
                             List<DocumentSnapshot> documentSnapshots = queryDocumentSnapshots.getDocuments();
                             if (documentSnapshots.size() > 0) {
                                 Notice notice = documentSnapshots.get(0).toObject(Notice.class);
-                                noticeBinding.setNotice(notice);
+                                if (noticeBinding != null) noticeBinding.setNotice(notice);
                             }
                         }
                     }
@@ -79,8 +79,15 @@ public class NoticeFragment extends Fragment {
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull @NotNull Exception e) {
-                        Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+                        if (getContext() != null) Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_LONG).show();
                     }
                 });
+    }
+
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        noticeBinding = null;
     }
 }
