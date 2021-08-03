@@ -72,13 +72,7 @@ public class HomeFragment extends Fragment {
         viewModel = new ViewModelProvider(requireActivity()).get(SharedViewModel.class);
         navController = Navigation.findNavController(view);
 
-        homeBinding.navigateToSearch.setOnClickListener(v -> {
-            if (shouldFetch()) {
-                fetchData(v);
-                return;
-            }
-            navigate(v);
-        });
+        homeBinding.navigateToSearch.setOnClickListener(this::navigate);
 
         homeBinding.navigateToLicense.setOnClickListener(v -> {
             if (shouldFetch()) {
@@ -106,7 +100,7 @@ public class HomeFragment extends Fragment {
         StorageUtil storageUtil = StorageUtil.getInstance(getActivity());
         boolean is_active = storageUtil.isActive();
         long past_time = storageUtil.getDate();
-        long days =  FormatDate.timeDifference(past_time);
+        long days = FormatDate.timeDifference(past_time);
 
         if (is_active) {
             if (days > 7) {
@@ -152,7 +146,8 @@ public class HomeFragment extends Fragment {
                             if (documentSnapshots.size() > 0) {
                                 boolean status = documentSnapshots.get(0).getBoolean("is_active");
                                 viewModel.setActive(status);
-                                if (getActivity() != null) StorageUtil.getInstance(getActivity()).setActive(status);
+                                if (getActivity() != null)
+                                    StorageUtil.getInstance(getActivity()).setActive(status);
                                 viewModel.setFetched(true);
                                 navigate(view);
                             }
@@ -176,20 +171,21 @@ public class HomeFragment extends Fragment {
 
     // Function to navigate to the another fragment as per the user click
     private void navigate(View view) {
-        if (viewModel.isActive()) {
-            if (view.getId() == homeBinding.navigateToSearch.getId()) {
-                navController.navigate(R.id.action_homeFragment_to_searchFragment);
-            } else {
-                navController.navigate(R.id.action_homeFragment_to_licenseFragment);
-            }
+        if (view.getId() == homeBinding.navigateToSearch.getId()) {
+            navController.navigate(R.id.action_homeFragment_to_searchFragment);
         } else {
-            navController.navigate(R.id.action_homeFragment_to_noticeFragment);
+            if (viewModel.isActive()) {
+                navController.navigate(R.id.action_homeFragment_to_licenseFragment);
+            } else {
+                navController.navigate(R.id.action_homeFragment_to_noticeFragment);
+            }
         }
     }
 
     /**
      * FUnction overrided to handle the action menu
-     * @param menu --
+     *
+     * @param menu     --
      * @param inflater --
      */
 
