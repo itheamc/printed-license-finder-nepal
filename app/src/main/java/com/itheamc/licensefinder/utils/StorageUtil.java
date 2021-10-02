@@ -48,6 +48,6 @@ public class StorageUtil {
 
     // Function to store app status
     public boolean isActive() {
-        return sharedPreferences.getBoolean("active_status", true);
+        return sharedPreferences.getBoolean("active_status", false);
     }
 }
