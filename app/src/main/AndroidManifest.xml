@@ -13,7 +13,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.LicenseFinder">
         <activity android:name=".ui.SplashActivity"
-            android:theme="@style/Theme.LicenseFinder.FullScreen">
+            android:theme="@style/Theme.LicenseFinder.FullScreen"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

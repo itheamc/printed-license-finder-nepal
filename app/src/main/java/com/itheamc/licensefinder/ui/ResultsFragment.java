@@ -42,7 +42,6 @@ public class ResultsFragment extends Fragment implements LicenseCallback, Filter
     private SharedViewModel viewModel;
     private LicenseAdapter licenseAdapter;
     private NavController navController;
-    private AdView mAdView;
 
 
     public ResultsFragment() {
@@ -57,7 +56,7 @@ public class ResultsFragment extends Fragment implements LicenseCallback, Filter
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
 
@@ -105,7 +104,7 @@ public class ResultsFragment extends Fragment implements LicenseCallback, Filter
             }
         });
 
-        mAdView = resultsBinding.bannerAdView;
+        AdView mAdView = resultsBinding.bannerAdView;
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
 
